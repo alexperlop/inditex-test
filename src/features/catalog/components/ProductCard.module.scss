@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  color: inherit;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  transition: background-color 120ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-surface);
+  }
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: contain;
+  padding: var(--space-4);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.brand {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.name {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+}
+
+.price {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-fg);
+  font-variant-numeric: tabular-nums;
+}
