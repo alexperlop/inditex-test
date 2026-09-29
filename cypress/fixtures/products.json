@@ -1,0 +1,23 @@
+[
+  {
+    "id": "SMG-S24U",
+    "brand": "Samsung",
+    "name": "Galaxy S24 Ultra",
+    "basePrice": 1329,
+    "imageUrl": "https://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-S24U-titanium-violet.webp"
+  },
+  {
+    "id": "APL-I15PM",
+    "brand": "Apple",
+    "name": "iPhone 15 Pro Max",
+    "basePrice": 1319,
+    "imageUrl": "https://prueba-tecnica-api-tienda-moviles.onrender.com/images/APL-I15PM-titanio-negro.webp"
+  },
+  {
+    "id": "XMI-RN13P5G",
+    "brand": "Xiaomi",
+    "name": "Redmi Note 13 Pro 5G",
+    "basePrice": 399,
+    "imageUrl": "https://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-black.webp"
+  }
+]
