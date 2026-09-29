@@ -24,7 +24,6 @@ Aplicación web para consultar un catálogo de teléfonos móviles, ver el detal
 nvm use            # opcional, pero recomendado
 npm install
 cp .env.example .env.local
-# rellena PHONE_API_KEY con el valor facilitado en el enunciado
 npm run dev        # http://localhost:3000
 ```
 
