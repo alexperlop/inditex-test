@@ -1,0 +1,25 @@
+.swatches {
+  display: inline-flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  padding: 0;
+  cursor: pointer;
+}
+
+.selected {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 2px;
+}
+
+.selectedLabel {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+}

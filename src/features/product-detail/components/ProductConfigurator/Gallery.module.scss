@@ -1,0 +1,19 @@
+.wrapper {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.placeholder {
+  aspect-ratio: 1;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.image {
+  object-fit: contain;
+  padding: var(--space-6);
+}

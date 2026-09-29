@@ -1,0 +1,18 @@
+.button {
+  width: 100%;
+  padding: var(--space-4);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  &:disabled {
+    background-color: var(--color-subtle);
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+}
