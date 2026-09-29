@@ -1,6 +1,8 @@
-const priceFormatter = new Intl.NumberFormat('es-ES', {
+import { FORMAT } from '@/constants';
+
+const priceFormatter = new Intl.NumberFormat(FORMAT.LOCALE, {
   style: 'currency',
-  currency: 'EUR',
+  currency: FORMAT.CURRENCY,
   maximumFractionDigits: 0,
   useGrouping: 'always',
 });

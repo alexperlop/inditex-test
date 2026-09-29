@@ -1,9 +1,10 @@
 import { z } from 'zod';
+import { ENV } from '@/constants';
 
 const serverSchema = z.object({
   PHONE_API_URL: z.string().url(),
-  PHONE_API_KEY: z.string().min(1, 'PHONE_API_KEY is required'),
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  PHONE_API_KEY: z.string().min(1, ENV.ERROR_KEY_REQUIRED),
+  NODE_ENV: z.enum(ENV.NODE_ENVS).default(ENV.DEFAULT_NODE_ENV),
 });
 
 export type ServerEnv = z.infer<typeof serverSchema>;
@@ -19,7 +20,7 @@ export function getServerEnv(): ServerEnv {
   });
   if (!parsed.success) {
     const issues = parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ');
-    throw new Error(`Invalid server environment variables: ${issues}`);
+    throw new Error(`${ENV.ERROR_INVALID_PREFIX}: ${issues}`);
   }
   cached = parsed.data;
   return cached;

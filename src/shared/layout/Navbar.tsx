@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { COPY, ROUTES } from '@/constants';
 import styles from './Navbar.module.scss';
 
 export interface NavbarProps {
@@ -9,10 +10,10 @@ export interface NavbarProps {
 export function Navbar({ right }: NavbarProps) {
   return (
     <header className={styles.header} role="banner">
-      <nav className={styles.nav} aria-label="Principal">
-        <Link href="/" className={styles.brand} aria-label="Ir al inicio">
+      <nav className={styles.nav} aria-label={COPY.nav.PRIMARY_ARIA}>
+        <Link href={ROUTES.HOME} className={styles.brand} aria-label={COPY.nav.HOME_ARIA}>
           <HomeIcon aria-hidden="true" />
-          <span className={styles.brandText}>MOBILE&nbsp;STORE</span>
+          <span className={styles.brandText}>{COPY.nav.BRAND}</span>
         </Link>
         <div className={styles.right}>{right}</div>
       </nav>

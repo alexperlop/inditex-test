@@ -1,5 +1,6 @@
 'use client';
 
+import { COPY } from '@/constants';
 import styles from './QueryErrorRetry.module.scss';
 
 interface QueryErrorRetryProps {
@@ -12,7 +13,7 @@ export function QueryErrorRetry({ message, onRetry }: QueryErrorRetryProps) {
     <div role="alert" className={styles.wrapper}>
       <p>{message}</p>
       <button type="button" onClick={onRetry}>
-        Reintentar
+        {COPY.common.RETRY}
       </button>
     </div>
   );

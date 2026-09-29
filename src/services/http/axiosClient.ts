@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance } from 'axios';
+import { API, LOG } from '@/constants';
 import { getServerEnv } from '@/lib/env';
 
 let serverInstance: AxiosInstance | null = null;
@@ -13,19 +14,19 @@ function getServerApiClient(): AxiosInstance {
   const env = getServerEnv();
   serverInstance = axios.create({
     baseURL: env.PHONE_API_URL,
-    timeout: 15_000,
+    timeout: API.TIMEOUT_MS,
     headers: {
-      'x-api-key': env.PHONE_API_KEY,
-      Accept: 'application/json',
+      [API.HEADERS.API_KEY_HEADER]: env.PHONE_API_KEY,
+      Accept: API.HEADERS.ACCEPT,
     },
   });
   serverInstance.interceptors.response.use(
     (r) => r,
     (error) => {
-      const status = error?.response?.status ?? 'network';
+      const status = error?.response?.status ?? LOG.API_NETWORK;
       const url = error?.config?.url ?? '';
 
-      console.error(`[api] ${status} ${url}`);
+      console.error(`${LOG.API_PREFIX} ${status} ${url}`);
       return Promise.reject(error);
     },
   );
@@ -35,9 +36,9 @@ function getServerApiClient(): AxiosInstance {
 function getBrowserApiClient(): AxiosInstance {
   if (browserInstance) return browserInstance;
   browserInstance = axios.create({
-    baseURL: '/api',
-    timeout: 15_000,
-    headers: { Accept: 'application/json' },
+    baseURL: API.BROWSER_BASE_URL,
+    timeout: API.TIMEOUT_MS,
+    headers: { Accept: API.HEADERS.ACCEPT },
   });
   return browserInstance;
 }
@@ -50,7 +51,7 @@ export function getApiErrorStatus(error: unknown): number {
   if (axios.isAxiosError(error) && typeof error.response?.status === 'number') {
     return error.response.status;
   }
-  return 502;
+  return API.FALLBACK_STATUS;
 }
 
 export { getServerApiClient };

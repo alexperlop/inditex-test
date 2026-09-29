@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { CART } from '@/constants';
 import type { CartItem, ColorOption, ProductDetail, StorageOption } from '@/domain/product';
 
 interface CartState {
@@ -10,7 +11,7 @@ interface CartState {
 }
 
 function makeCartLineId(productId: string, colorName: string, capacity: string): string {
-  return `${productId}::${colorName}::${capacity}`;
+  return [productId, colorName, capacity].join(CART.LINE_ID_SEPARATOR);
 }
 
 export const useCartStore = create<CartState>()(
@@ -42,7 +43,7 @@ export const useCartStore = create<CartState>()(
       clear: () => set({ items: [] }),
     }),
     {
-      name: 'zara-cart-v1',
+      name: CART.STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ items: state.items }),
     },

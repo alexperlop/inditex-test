@@ -1,3 +1,4 @@
+import { CONFIGURATOR_ACTION } from '@/constants';
 import type { ColorOption, StorageOption } from '@/domain/product';
 
 export interface ConfiguratorState {
@@ -6,20 +7,20 @@ export interface ConfiguratorState {
 }
 
 export type ConfiguratorAction =
-  | { type: 'SET_COLOR'; color: ColorOption }
-  | { type: 'SET_STORAGE'; storage: StorageOption }
-  | { type: 'RESET'; state: ConfiguratorState };
+  | { type: typeof CONFIGURATOR_ACTION.SET_COLOR; color: ColorOption }
+  | { type: typeof CONFIGURATOR_ACTION.SET_STORAGE; storage: StorageOption }
+  | { type: typeof CONFIGURATOR_ACTION.RESET; state: ConfiguratorState };
 
 export function configuratorReducer(
   state: ConfiguratorState,
   action: ConfiguratorAction,
 ): ConfiguratorState {
   switch (action.type) {
-    case 'SET_COLOR':
+    case CONFIGURATOR_ACTION.SET_COLOR:
       return { ...state, color: action.color };
-    case 'SET_STORAGE':
+    case CONFIGURATOR_ACTION.SET_STORAGE:
       return { ...state, storage: action.storage };
-    case 'RESET':
+    case CONFIGURATOR_ACTION.RESET:
       return action.state;
     default:
       return state;

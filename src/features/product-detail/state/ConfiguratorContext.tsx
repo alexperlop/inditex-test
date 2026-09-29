@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useCallback, useContext, useMemo, useReducer, type ReactNode } from 'react';
+import { CONFIGURATOR_ACTION, COPY } from '@/constants';
 import type { ColorOption, ProductDetail, StorageOption } from '@/domain/product';
 import {
   configuratorReducer,
@@ -41,9 +42,12 @@ export function ConfiguratorProvider({
     storage: initialStorage ?? initialConfiguratorState.storage,
   });
 
-  const setColor = useCallback((color: ColorOption) => dispatch({ type: 'SET_COLOR', color }), []);
+  const setColor = useCallback(
+    (color: ColorOption) => dispatch({ type: CONFIGURATOR_ACTION.SET_COLOR, color }),
+    [],
+  );
   const setStorage = useCallback(
-    (storage: StorageOption) => dispatch({ type: 'SET_STORAGE', storage }),
+    (storage: StorageOption) => dispatch({ type: CONFIGURATOR_ACTION.SET_STORAGE, storage }),
     [],
   );
 
@@ -72,13 +76,13 @@ export function ConfiguratorProvider({
 
 function useStable(): ConfiguratorStableContextValue {
   const ctx = useContext(ConfiguratorStableContext);
-  if (!ctx) throw new Error('useConfigurator hooks must be used inside <ProductConfigurator>');
+  if (!ctx) throw new Error(COPY.productDetail.configuratorProviderError);
   return ctx;
 }
 
 function useDerived(): ConfiguratorStateContextValue {
   const ctx = useContext(ConfiguratorStateContext);
-  if (!ctx) throw new Error('useConfigurator hooks must be used inside <ProductConfigurator>');
+  if (!ctx) throw new Error(COPY.productDetail.configuratorProviderError);
   return ctx;
 }
 

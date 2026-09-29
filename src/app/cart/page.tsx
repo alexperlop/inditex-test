@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
+import { META } from '@/constants';
 import { CartView } from '@/features/cart/components/CartView';
 
 export const metadata: Metadata = {
-  title: 'Carrito · Mobile Store',
+  title: META.CART_TITLE,
 };
 
 export default function CartPage() {

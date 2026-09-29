@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { COPY, ROUTES } from '@/constants';
 import { useCart, useHasHydrated } from '@/features/cart/hooks/useCart';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
 import { CartItem } from './CartItem';
@@ -14,7 +15,7 @@ export function CartView() {
   if (!hydrated) {
     return (
       <div className={styles.wrapper}>
-        <LoadingMessage label="Cargando carrito…" />
+        <LoadingMessage label={COPY.cart.LOADING} />
       </div>
     );
   }
@@ -22,10 +23,10 @@ export function CartView() {
   if (items.length === 0) {
     return (
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>Tu carrito está vacío</h1>
-        <p className={styles.empty}>Aún no has añadido productos.</p>
-        <Link href="/" className={styles.link}>
-          Continuar comprando
+        <h1 className={styles.title}>{COPY.cart.EMPTY_TITLE}</h1>
+        <p className={styles.empty}>{COPY.cart.EMPTY_HINT}</p>
+        <Link href={ROUTES.HOME} className={styles.link}>
+          {COPY.cart.CONTINUE}
         </Link>
       </div>
     );
@@ -33,7 +34,7 @@ export function CartView() {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>Carrito</h1>
+      <h1 className={styles.title}>{COPY.cart.HEADING}</h1>
       <div className={styles.grid}>
         <ul className={styles.list}>
           {items.map((item) => (

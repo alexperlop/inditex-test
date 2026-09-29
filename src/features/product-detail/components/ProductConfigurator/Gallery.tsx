@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { IMAGE_SIZES } from '@/constants';
 import {
   useConfiguratorProduct,
   useConfiguratorState,
@@ -24,7 +25,7 @@ export function Gallery() {
         alt={`${product.brand} ${product.name} ${altColor}`.trim()}
         fill
         priority
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes={IMAGE_SIZES.GALLERY}
         className={styles.image}
       />
     </div>

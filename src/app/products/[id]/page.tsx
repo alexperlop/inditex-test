@@ -16,7 +16,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const queryClient = getQueryClient();
 
   try {
-    await queryClient.fetchQuery({
+    await queryClient.query({
       queryKey: productKeys.detail(id),
       queryFn: () => productsService.getById(id),
       staleTime: PRODUCT_DETAIL_STALE_TIME,

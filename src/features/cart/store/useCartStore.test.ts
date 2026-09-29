@@ -1,4 +1,5 @@
 import { beforeEach, describe, it, expect } from 'vitest';
+import { CART } from '@/constants';
 import { useCartStore } from './useCartStore';
 import type { ColorOption, ProductDetail, StorageOption } from '@/domain/product';
 
@@ -28,6 +29,9 @@ const product: ProductDetail = {
   similarProducts: [],
 };
 
+const lineId = (capacity: string) =>
+  [product.id, color.name, capacity].join(CART.LINE_ID_SEPARATOR);
+
 beforeEach(() => {
   useCartStore.setState({ items: [] });
 });
@@ -37,7 +41,7 @@ describe('useCartStore', () => {
     useCartStore.getState().addItem(product, color, storage);
     const items = useCartStore.getState().items;
     expect(items).toHaveLength(1);
-    expect(items[0]?.cartLineId).toBe('PRD-1::Negro::256 GB');
+    expect(items[0]?.cartLineId).toBe(lineId(storage.capacity));
     expect(items[0]?.unitPrice).toBe(999);
   });
 
@@ -55,7 +59,7 @@ describe('useCartStore', () => {
 
   it('removes an item by cartLineId', () => {
     useCartStore.getState().addItem(product, color, storage);
-    useCartStore.getState().removeItem('PRD-1::Negro::256 GB');
+    useCartStore.getState().removeItem(lineId(storage.capacity));
     expect(useCartStore.getState().items).toEqual([]);
   });
 

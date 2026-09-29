@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { COPY } from '@/constants';
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
@@ -14,10 +15,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
 
   return (
     <section style={{ padding: 24 }} role="alert">
-      <h1>Algo ha ido mal</h1>
-      <p>{error.message || 'Error inesperado'}</p>
+      <h1>{COPY.common.ERROR_HEADING}</h1>
+      <p>{error.message || COPY.common.UNEXPECTED_ERROR}</p>
       <button type="button" onClick={reset}>
-        Reintentar
+        {COPY.common.RETRY}
       </button>
     </section>
   );

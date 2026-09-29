@@ -1,6 +1,7 @@
 'use client';
 
 import { Component, type ComponentType, type ReactNode } from 'react';
+import { COPY, LOG } from '@/constants';
 
 interface ErrorBoundaryProps {
   fallback: (error: Error, reset: () => void) => ReactNode;
@@ -19,7 +20,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   override componentDidCatch(error: Error) {
-    console.error('[error-boundary]', error);
+    console.error(LOG.ERROR_BOUNDARY_PREFIX, error);
   }
 
   reset = () => this.setState({ error: null });
@@ -38,9 +39,9 @@ export interface WithErrorBoundaryOptions {
 
 const defaultFallback = (error: Error, reset: () => void) => (
   <div role="alert" style={{ padding: 24 }}>
-    <p>Ha ocurrido un error: {error.message}</p>
+    <p>{COPY.common.errorBoundaryMessage(error.message)}</p>
     <button type="button" onClick={reset}>
-      Reintentar
+      {COPY.common.RETRY}
     </button>
   </div>
 );

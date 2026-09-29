@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { SEARCH } from '@/constants';
 
-export function useDebouncedValue<T>(value: T, delay = 300): T {
+export function useDebouncedValue<T>(value: T, delay: number = SEARCH.DEFAULT_DEBOUNCE_MS): T {
   const [debounced, setDebounced] = useState(value);
   useEffect(() => {
     if (Object.is(value, debounced)) return;

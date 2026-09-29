@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { COPY, ROUTES } from '@/constants';
 import { useProduct } from '@/features/product-detail/hooks/useProduct';
 import { withErrorBoundary } from '@/shared/hoc/withErrorBoundary';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
@@ -35,7 +36,7 @@ function ProductDetailViewImpl({ productId }: ProductDetailViewProps) {
   if (isLoading && !data) {
     return (
       <div className={styles.wrapper}>
-        <LoadingMessage label="Cargando producto…" />
+        <LoadingMessage label={COPY.productDetail.LOADING} />
       </div>
     );
   }
@@ -43,15 +44,15 @@ function ProductDetailViewImpl({ productId }: ProductDetailViewProps) {
   if (isError || !data) {
     return (
       <div className={styles.wrapper}>
-        <QueryErrorRetry message="No pudimos cargar el producto." onRetry={() => refetch()} />
+        <QueryErrorRetry message={COPY.productDetail.ERROR} onRetry={() => refetch()} />
       </div>
     );
   }
 
   return (
     <div className={styles.wrapper}>
-      <nav className={styles.breadcrumbs} aria-label="Migas de pan">
-        <Link href="/">← Volver al catálogo</Link>
+      <nav className={styles.breadcrumbs} aria-label={COPY.productDetail.BREADCRUMBS_ARIA}>
+        <Link href={ROUTES.HOME}>{COPY.productDetail.BACK}</Link>
       </nav>
 
       <ProductConfigurator product={data}>

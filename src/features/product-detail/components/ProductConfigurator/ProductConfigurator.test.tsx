@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { TEST_IDS } from '@/constants';
 import { ProductConfigurator } from './index';
 import { useCartStore } from '@/features/cart/store/useCartStore';
 import type { ProductDetail } from '@/domain/product';
@@ -60,23 +61,23 @@ describe('ProductConfigurator (compound + provider)', () => {
     const user = userEvent.setup();
     render(<Setup />);
 
-    const addBtn = screen.getByTestId('add-to-cart');
+    const addBtn = screen.getByTestId(TEST_IDS.ADD_TO_CART);
     expect(addBtn).toBeDisabled();
 
-    await user.click(screen.getByTestId('storage-256 GB'));
-    expect(screen.getByTestId('current-price')).toHaveTextContent('1.099');
+    await user.click(screen.getByTestId(`${TEST_IDS.STORAGE_PICKER_PREFIX}-256 GB`));
+    expect(screen.getByTestId(TEST_IDS.CURRENT_PRICE)).toHaveTextContent('1.099');
     expect(addBtn).toBeDisabled();
 
-    await user.click(screen.getByTestId('color-Negro'));
+    await user.click(screen.getByTestId(`${TEST_IDS.COLOR_PICKER_PREFIX}-Negro`));
     expect(addBtn).toBeEnabled();
   });
 
   it('adds the configured product to the cart store on click', async () => {
     const user = userEvent.setup();
     render(<Setup />);
-    await user.click(screen.getByTestId('storage-128 GB'));
-    await user.click(screen.getByTestId('color-Blanco'));
-    await user.click(screen.getByTestId('add-to-cart'));
+    await user.click(screen.getByTestId(`${TEST_IDS.STORAGE_PICKER_PREFIX}-128 GB`));
+    await user.click(screen.getByTestId(`${TEST_IDS.COLOR_PICKER_PREFIX}-Blanco`));
+    await user.click(screen.getByTestId(TEST_IDS.ADD_TO_CART));
 
     const items = useCartStore.getState().items;
     expect(items).toHaveLength(1);

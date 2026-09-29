@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { COPY, ROUTES, TEST_IDS } from '@/constants';
 import {
   useConfiguratorProduct,
   useConfiguratorSelection,
@@ -17,7 +18,7 @@ export function AddToCart() {
   const handleAdd = () => {
     if (!selection) return;
     addItem(product, selection.color, selection.storage);
-    router.push('/cart');
+    router.push(ROUTES.CART);
   };
 
   return (
@@ -26,9 +27,9 @@ export function AddToCart() {
       className={styles.button}
       onClick={handleAdd}
       disabled={!selection}
-      data-testid="add-to-cart"
+      data-testid={TEST_IDS.ADD_TO_CART}
     >
-      Añadir al carrito
+      {COPY.productDetail.ADD_TO_CART}
     </button>
   );
 }

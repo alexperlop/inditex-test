@@ -1,15 +1,16 @@
 'use client';
 
 import Link from 'next/link';
+import { COPY, ROUTES, TEST_IDS } from '@/constants';
 import { useCartCount } from '@/features/cart/hooks/useCart';
 import styles from './CartNavButton.module.scss';
 
 export function CartNavButton() {
   const count = useCartCount();
   return (
-    <Link href="/cart" className={styles.link} aria-label={`Ir al carrito. ${count} artículos.`}>
+    <Link href={ROUTES.CART} className={styles.link} aria-label={COPY.nav.cartAria(count)}>
       <BagIcon aria-hidden="true" />
-      <span className={styles.count} data-testid="cart-count">
+      <span className={styles.count} data-testid={TEST_IDS.CART_COUNT}>
         {count}
       </span>
     </Link>

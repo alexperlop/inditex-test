@@ -1,5 +1,6 @@
 'use client';
 
+import { COPY, TEST_IDS } from '@/constants';
 import type { ColorOption } from '@/domain/product';
 import { OptionPicker } from '@/shared/components/OptionPicker';
 import {
@@ -13,18 +14,18 @@ export function ColorPicker() {
   const product = useConfiguratorProduct();
   const state = useConfiguratorState();
   const { setColor } = useConfiguratorActions();
-  const selectedName = state.color?.name ?? 'Sin selección';
+  const selectedName = state.color?.name ?? COPY.productDetail.COLOR_NONE;
 
   return (
     <OptionPicker<ColorOption>
-      legend="Color"
-      ariaLabel={`Color. Seleccionado: ${selectedName}.`}
+      legend={COPY.productDetail.COLOR_LEGEND}
+      ariaLabel={COPY.productDetail.colorAria(selectedName)}
       items={product.colorOptions}
       getKey={(o) => o.name}
       isSelected={(o) => state.color?.name === o.name}
       onSelect={setColor}
       renderOption={() => null}
-      testIdPrefix="color"
+      testIdPrefix={TEST_IDS.COLOR_PICKER_PREFIX}
       groupClassName={styles.swatches}
       optionClassName={styles.swatch}
       selectedClassName={styles.selected}

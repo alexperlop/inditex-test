@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { COPY, PAGINATION, SEARCH } from '@/constants';
 import { useProducts } from '@/features/catalog/hooks/useProducts';
 import { withErrorBoundary } from '@/shared/hoc/withErrorBoundary';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
@@ -17,26 +18,27 @@ export interface CatalogViewProps {
 
 function CatalogViewImpl({ initialSearch }: CatalogViewProps) {
   const searchParams = useSearchParams();
-  const search = searchParams.get('search') ?? '';
-  const params = useMemo(() => ({ search, limit: 20, offset: 0 }), [search]);
+  const search = searchParams.get(SEARCH.QUERY_PARAM) ?? '';
+  const params = useMemo(
+    () => ({ search, limit: PAGINATION.DEFAULT_LIMIT, offset: PAGINATION.DEFAULT_OFFSET }),
+    [search],
+  );
   const { data, isLoading, isError, refetch } = useProducts(params);
 
   return (
     <section className={styles.section} aria-labelledby="catalog-heading">
       <div className={styles.header}>
         <h1 id="catalog-heading" className={styles.title}>
-          Teléfonos móviles
+          {COPY.catalog.HEADING}
         </h1>
         <SearchBar initialValue={initialSearch} />
         <ResultCount count={data?.length ?? 0} />
       </div>
 
-      {isError && (
-        <QueryErrorRetry message="No pudimos cargar los productos." onRetry={() => refetch()} />
-      )}
+      {isError && <QueryErrorRetry message={COPY.catalog.ERROR} onRetry={() => refetch()} />}
 
       {isLoading && !data ? (
-        <LoadingMessage label="Cargando productos…" />
+        <LoadingMessage label={COPY.catalog.LOADING} />
       ) : (
         <ProductGrid products={data ?? []} />
       )}
