@@ -129,6 +129,7 @@ export const COPY = {
     BRAND: 'MOBILE\u00A0STORE',
     PRIMARY_ARIA: 'Principal',
     HOME_ARIA: 'Ir al inicio',
+    SKIP_TO_CONTENT: 'Saltar al contenido principal',
     cartAria: (count: number) => `Ir al carrito. ${count} artículos.`,
   },
   catalog: {
@@ -149,6 +150,8 @@ export const COPY = {
     SPECS_HEADING: 'Especificaciones',
     SIMILAR_HEADING: 'Productos similares',
     ADD_TO_CART: 'Añadir al carrito',
+    ADD_TO_CART_HINT: 'Selecciona color y almacenamiento para continuar',
+    NO_IMAGE: 'Sin imagen disponible',
     COLOR_LEGEND: 'Color',
     colorAria: (selected: string) => `Color. Seleccionado: ${selected}.`,
     COLOR_NONE: 'Sin selección',

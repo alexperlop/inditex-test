@@ -12,6 +12,7 @@ export interface OptionPickerProps<T> {
   ariaLabel?: string;
   items: readonly T[];
   getKey: (item: T) => string;
+  getOptionLabel?: (item: T) => string;
   isSelected: (item: T) => boolean;
   onSelect: (item: T) => void;
   renderOption: (item: T, ctx: OptionRenderContext) => ReactNode;
@@ -28,6 +29,7 @@ export function OptionPicker<T>({
   ariaLabel,
   items,
   getKey,
+  getOptionLabel,
   isSelected,
   onSelect,
   renderOption,
@@ -45,12 +47,15 @@ export function OptionPicker<T>({
         {items.map((item) => {
           const selected = isSelected(item);
           const key = getKey(item);
+          const label = getOptionLabel?.(item);
           return (
             <button
               key={key}
               type="button"
               role="radio"
               aria-checked={selected}
+              aria-label={label}
+              title={label}
               className={`${optionClassName ?? ''} ${selected ? (selectedClassName ?? '') : ''}`}
               style={optionStyle?.(item)}
               onClick={() => onSelect(item)}

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { IMAGE_SIZES } from '@/constants';
+import { COPY, IMAGE_SIZES } from '@/constants';
 import {
   useConfiguratorProduct,
   useConfiguratorState,
@@ -15,7 +15,9 @@ export function Gallery() {
   const altColor = state.color?.name ?? product.colorOptions[0]?.name ?? '';
 
   if (!image) {
-    return <div className={styles.placeholder} aria-hidden="true" />;
+    return (
+      <div className={styles.placeholder} role="img" aria-label={COPY.productDetail.NO_IMAGE} />
+    );
   }
 
   return (

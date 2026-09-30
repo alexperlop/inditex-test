@@ -1,0 +1,26 @@
+@use 'mixins' as *;
+
+.link {
+  @include visually-hidden;
+}
+
+.link:focus,
+.link:focus-visible {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  width: auto;
+  height: auto;
+  padding: var(--space-3) var(--space-4);
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+  white-space: nowrap;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  border: 2px solid var(--color-focus);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+}

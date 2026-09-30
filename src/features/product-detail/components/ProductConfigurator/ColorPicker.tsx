@@ -22,6 +22,7 @@ export function ColorPicker() {
       ariaLabel={COPY.productDetail.colorAria(selectedName)}
       items={product.colorOptions}
       getKey={(o) => o.name}
+      getOptionLabel={(o) => o.name}
       isSelected={(o) => state.color?.name === o.name}
       onSelect={setColor}
       renderOption={() => null}
