@@ -21,28 +21,36 @@ function mapListItem(dto: ProductListItemDto): ProductListItem {
   };
 }
 
+function dedupeById<T extends { id: string }>(items: T[]): T[] {
+  const seen = new Set<string>();
+  return items.filter((item) => (seen.has(item.id) ? false : seen.add(item.id) && true));
+}
+
 function mapDetail(dto: ProductDetailDto): ProductDetail {
+  const brand = dto.brand.trim();
+  const name = dto.name.trim();
+  const description = dto.description.trim();
   return {
     id: dto.id,
-    brand: dto.brand.trim(),
-    name: dto.name.trim(),
-    description: dto.description.trim(),
+    brand,
+    name,
+    description,
     basePrice: dto.basePrice,
     rating: dto.rating,
-    specs: dto.specs,
+    specs: { brand, name, description, ...dto.specs },
     colorOptions: dto.colorOptions.map((c) => ({
       name: c.name.trim(),
       hexCode: c.hexCode,
       imageUrl: normalizeImageUrl(c.imageUrl),
     })),
     storageOptions: dto.storageOptions,
-    similarProducts: dto.similarProducts.map(mapListItem),
+    similarProducts: dedupeById(dto.similarProducts.map(mapListItem)),
   };
 }
 
 export function adaptProductList(raw: unknown): ProductListItem[] {
   const parsed = productListSchema.parse(raw);
-  return parsed.map(mapListItem);
+  return dedupeById(parsed.map(mapListItem));
 }
 
 export function adaptProductDetail(raw: unknown): ProductDetail {

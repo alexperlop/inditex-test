@@ -96,6 +96,9 @@ export const IMAGE_SIZES = {
 } as const;
 
 export const SPEC_LABELS: ReadonlyArray<[keyof ProductSpecs, string]> = [
+  ['brand', 'Marca'],
+  ['name', 'Nombre'],
+  ['description', 'Descripción'],
   ['screen', 'Pantalla'],
   ['resolution', 'Resolución'],
   ['processor', 'Procesador'],

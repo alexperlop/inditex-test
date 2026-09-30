@@ -70,7 +70,7 @@ function ProductDetailViewImpl({ productId }: ProductDetailViewProps) {
         </div>
       </ProductConfigurator>
 
-      <Specs specs={data.specs} description={data.description} />
+      <Specs specs={data.specs} />
 
       <SimilarProducts items={data.similarProducts} />
     </div>

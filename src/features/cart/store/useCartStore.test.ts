@@ -15,6 +15,9 @@ const product: ProductDetail = {
   basePrice: 999,
   rating: 4,
   specs: {
+    brand: '',
+    name: '',
+    description: '',
     screen: '',
     resolution: '',
     processor: '',

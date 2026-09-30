@@ -7,6 +7,9 @@ export interface ProductListItem {
 }
 
 export interface ProductSpecs {
+  brand: string;
+  name: string;
+  description: string;
   screen: string;
   resolution: string;
   processor: string;
