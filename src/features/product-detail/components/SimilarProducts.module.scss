@@ -10,15 +10,25 @@
   font-weight: 500;
 }
 
-.grid {
+.scroller {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-right: calc(50% - 50vw);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  gap: var(--space-4);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+}
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+.item {
+  flex: 0 0 auto;
+  width: 344px;
 }

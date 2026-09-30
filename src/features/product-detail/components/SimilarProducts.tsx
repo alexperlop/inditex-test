@@ -1,4 +1,4 @@
-import { COPY, SIMILAR_PRODUCTS_LIMIT } from '@/constants';
+import { COPY } from '@/constants';
 import type { ProductListItem } from '@/domain/product';
 import { ProductCard } from '@/features/catalog/components/ProductCard';
 import styles from './SimilarProducts.module.scss';
@@ -10,13 +10,15 @@ export default function SimilarProducts({ items }: { items: ProductListItem[] })
       <h2 id="similar-heading" className={styles.heading}>
         {COPY.productDetail.SIMILAR_HEADING}
       </h2>
-      <ul className={styles.grid}>
-        {items.slice(0, SIMILAR_PRODUCTS_LIMIT).map((product) => (
-          <li key={product.id}>
-            <ProductCard product={product} />
-          </li>
-        ))}
-      </ul>
+      <div className={styles.scroller}>
+        <ul className={styles.list}>
+          {items.map((product) => (
+            <li key={product.id} className={styles.item}>
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

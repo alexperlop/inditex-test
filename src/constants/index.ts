@@ -37,8 +37,6 @@ export const PAGINATION = {
   DEFAULT_OFFSET: 0,
 } as const;
 
-export const SIMILAR_PRODUCTS_LIMIT = 4;
-
 export const SEARCH = {
   DEBOUNCE_MS: 350,
   DEFAULT_DEBOUNCE_MS: 300,

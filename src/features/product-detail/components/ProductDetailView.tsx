@@ -50,30 +50,31 @@ function ProductDetailViewImpl({ productId }: ProductDetailViewProps) {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <nav className={styles.breadcrumbs} aria-label={COPY.productDetail.BREADCRUMBS_ARIA}>
         <Link href={ROUTES.HOME}>{COPY.productDetail.BACK}</Link>
       </nav>
-
-      <ProductConfigurator product={data}>
-        <div className={styles.grid}>
-          <div className={styles.gallery}>
-            <ProductConfigurator.Gallery />
+      <section className={styles.wrapper}>
+        <ProductConfigurator product={data}>
+          <div className={styles.grid}>
+            <div className={styles.gallery}>
+              <ProductConfigurator.Gallery />
+            </div>
+            <div className={styles.aside}>
+              <ProductConfigurator.Header />
+              <ProductConfigurator.Price />
+              <ProductConfigurator.StoragePicker />
+              <ProductConfigurator.ColorPicker />
+              <ProductConfigurator.AddToCart />
+            </div>
           </div>
-          <div className={styles.aside}>
-            <ProductConfigurator.Header />
-            <ProductConfigurator.Price />
-            <ProductConfigurator.StoragePicker />
-            <ProductConfigurator.ColorPicker />
-            <ProductConfigurator.AddToCart />
-          </div>
-        </div>
-      </ProductConfigurator>
+        </ProductConfigurator>
 
-      <Specs specs={data.specs} />
+        <Specs specs={data.specs} />
 
-      <SimilarProducts items={data.similarProducts} />
-    </div>
+        <SimilarProducts items={data.similarProducts} />
+      </section>
+    </>
   );
 }
 
