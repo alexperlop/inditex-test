@@ -1,9 +1,7 @@
-@use 'mixins' as *;
-
 .wrapper {
-  @include container;
   padding-block: var(--space-4);
-
+  max-width: 1200px;
+  margin-inline: auto;
   @media (min-width: 768px) {
     padding-block: var(--space-6);
   }
@@ -28,13 +26,14 @@
 }
 
 .gallery {
-  min-width: 0;
+  max-width: 510px;
 }
 
 .aside {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 380px;
 }
 
 .similarSkeleton {

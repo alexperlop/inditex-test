@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { HTML_LANG, META } from '@/constants';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { Navbar } from '@/shared/layout/Navbar';
+import { PageContainer } from '@/shared/layout/PageContainer';
 import { SkipLink } from '@/shared/components/SkipLink';
 import { CartNavButton } from '@/features/cart/components/CartNavButton';
 import './globals.scss';
@@ -18,10 +19,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <SkipLink />
         <QueryProvider>
-          <Navbar right={<CartNavButton />} />
-          <main id="main" tabIndex={-1}>
-            {children}
-          </main>
+          <PageContainer>
+            <Navbar right={<CartNavButton />} />
+            <main id="main" tabIndex={-1}>
+              {children}
+            </main>
+          </PageContainer>
         </QueryProvider>
       </body>
     </html>

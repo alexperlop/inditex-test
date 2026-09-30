@@ -1,7 +1,7 @@
-@use 'mixins' as *;
-
 .wrapper {
-  @include container;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
   padding-block: var(--space-6);
 
   @media (min-width: 768px) {
@@ -10,11 +10,10 @@
 }
 
 .title {
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-8);
   font-size: var(--font-size-xl);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .empty {
@@ -24,19 +23,16 @@
 
 .link {
   display: inline-flex;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-fg);
-  border-radius: var(--radius-sm);
-}
-
-.grid {
-  display: grid;
-  gap: var(--space-6);
-  grid-template-columns: 1fr;
-
-  @media (min-width: 900px) {
-    grid-template-columns: 1fr 320px;
-  }
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--font-size-sm);
 }
 
 .list {
