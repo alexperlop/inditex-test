@@ -1,6 +1,6 @@
 import { COPY, TEST_IDS } from '@/constants';
 import type { ProductListItem } from '@/domain/product';
-import { ProductCard } from './ProductCard';
+import { ProductCard } from '../ProductCard';
 import styles from './ProductGrid.module.scss';
 
 export function ProductGrid({ products }: { products: ProductListItem[] }) {

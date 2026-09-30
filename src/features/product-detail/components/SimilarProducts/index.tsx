@@ -3,7 +3,7 @@ import type { ProductListItem } from '@/domain/product';
 import { ProductCard } from '@/features/catalog/components/ProductCard';
 import styles from './SimilarProducts.module.scss';
 
-export default function SimilarProducts({ items }: { items: ProductListItem[] }) {
+export function SimilarProducts({ items }: { items: ProductListItem[] }) {
   if (items.length === 0) return null;
   return (
     <section className={styles.section} aria-labelledby="similar-heading">

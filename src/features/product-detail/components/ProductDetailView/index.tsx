@@ -7,13 +7,16 @@ import { useProduct } from '@/features/product-detail/hooks/useProduct';
 import { withErrorBoundary } from '@/shared/hoc/withErrorBoundary';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
 import { QueryErrorRetry } from '@/shared/components/QueryErrorRetry';
-import { ProductConfigurator } from './ProductConfigurator';
-import { Specs } from './Specs';
+import { ProductConfigurator } from '../ProductConfigurator';
+import { Specs } from '../Specs';
 import styles from './ProductDetailView.module.scss';
 
-const SimilarProducts = dynamic(() => import('./SimilarProducts'), {
-  loading: () => <SimilarSkeleton />,
-});
+const SimilarProducts = dynamic(
+  () => import('../SimilarProducts').then((mod) => mod.SimilarProducts),
+  {
+    loading: () => <SimilarSkeleton />,
+  },
+);
 
 function SimilarSkeleton() {
   return (

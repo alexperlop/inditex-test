@@ -7,7 +7,7 @@ import {
   configuratorReducer,
   initialConfiguratorState,
   type ConfiguratorState,
-} from './configuratorReducer';
+} from '../configuratorReducer';
 
 interface ConfiguratorStableContextValue {
   product: ProductDetail;

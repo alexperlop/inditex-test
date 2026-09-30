@@ -7,9 +7,9 @@ import { useProducts } from '@/features/catalog/hooks/useProducts';
 import { withErrorBoundary } from '@/shared/hoc/withErrorBoundary';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
 import { QueryErrorRetry } from '@/shared/components/QueryErrorRetry';
-import { SearchBar } from './SearchBar';
-import { ResultCount } from './ResultCount';
-import { ProductGrid } from './ProductGrid';
+import { SearchBar } from '../SearchBar';
+import { ResultCount } from '../ResultCount';
+import { ProductGrid } from '../ProductGrid';
 import styles from './CatalogView.module.scss';
 
 export interface CatalogViewProps {

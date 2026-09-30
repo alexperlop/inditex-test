@@ -4,7 +4,7 @@ import {
   productListSchema,
   type ProductDetailDto,
   type ProductListItemDto,
-} from './product.schema';
+} from '../product.schema';
 
 function normalizeImageUrl(url: string): string {
   if (!url) return url;

@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { COPY, ROUTES } from '@/constants';
 import { useCart, useHasHydrated } from '@/features/cart/hooks/useCart';
 import { LoadingMessage } from '@/shared/components/LoadingMessage';
-import { CartItem } from './CartItem';
-import { CartSummary } from './CartSummary';
+import { CartItem } from '../CartItem';
+import { CartSummary } from '../CartSummary';
 import styles from './CartView.module.scss';
 
 export function CartView() {
