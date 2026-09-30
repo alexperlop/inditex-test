@@ -129,7 +129,6 @@ export const COPY = {
     NOT_FOUND_LINK: 'Volver al inicio',
   },
   nav: {
-    BRAND: 'MOBILE\u00A0STORE',
     PRIMARY_ARIA: 'Principal',
     HOME_ARIA: 'Ir al inicio',
     SKIP_TO_CONTENT: 'Saltar al contenido principal',

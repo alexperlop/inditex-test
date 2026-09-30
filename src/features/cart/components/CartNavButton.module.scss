@@ -1,23 +1,31 @@
 .link {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
+  gap: 6px;
+  color: var(--color-fg);
+
+  @media (min-width: 1024px) {
+    width: 33px;
+    height: 26px;
+    padding: 4px 0;
+  }
+}
+
+.icon {
+  width: 12.2353px;
+  height: 16px;
+
+  @media (min-width: 1024px) {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .count {
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
-  margin-left: var(--space-2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-fg);
-  color: var(--color-bg);
-  border-radius: 999px;
+  color: var(--color-fg);
   font-size: var(--font-size-xs);
   font-variant-numeric: tabular-nums;
   line-height: 1;

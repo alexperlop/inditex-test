@@ -9,7 +9,7 @@ export function CartNavButton() {
   const count = useCartCount();
   return (
     <Link href={ROUTES.CART} className={styles.link} aria-label={COPY.nav.cartAria(count)}>
-      <BagIcon aria-hidden="true" />
+      <BagIcon className={styles.icon} aria-hidden="true" />
       <span className={styles.count} data-testid={TEST_IDS.CART_COUNT}>
         {count}
       </span>
@@ -19,19 +19,13 @@ export function CartNavButton() {
 
 function BagIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M6 7h12l-1 13H7L6 7Z" />
-      <path d="M9 7a3 3 0 1 1 6 0" />
+    <svg viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8.47059 0H3.76471V3.76471H0V16H12.2353V3.76471H8.47059V0ZM7.52941 4.70588V7.05882H8.47059V4.70588H11.2941V15.0588H0.941176V4.70588H3.76471V7.05882H4.70588V4.70588H7.52941ZM7.52941 3.76471V0.941176H4.70588V3.76471H7.52941Z"
+        fill="currentColor"
+      />
     </svg>
   );
 }
