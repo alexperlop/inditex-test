@@ -135,7 +135,6 @@ export const COPY = {
     cartAria: (count: number) => `Ir al carrito. ${count} artículos.`,
   },
   catalog: {
-    HEADING: 'Teléfonos móviles',
     SEARCH_LABEL: 'Buscar por nombre o marca',
     SEARCH_PLACEHOLDER: 'Buscar por nombre o marca…',
     LOADING: 'Cargando productos…',

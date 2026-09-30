@@ -26,11 +26,8 @@ function CatalogViewImpl({ initialSearch }: CatalogViewProps) {
   const { data, isLoading, isError, refetch } = useProducts(params);
 
   return (
-    <section className={styles.section} aria-labelledby="catalog-heading">
+    <section className={styles.section}>
       <div className={styles.header}>
-        <h1 id="catalog-heading" className={styles.title}>
-          {COPY.catalog.HEADING}
-        </h1>
         <SearchBar initialValue={initialSearch} />
         <ResultCount count={data?.length ?? 0} />
       </div>

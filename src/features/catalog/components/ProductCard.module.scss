@@ -1,35 +1,56 @@
 .card {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   color: inherit;
-  padding: var(--space-3);
-  border-radius: var(--radius-md);
-  transition: background-color 120ms ease;
+  aspect-ratio: 1 / 1;
+  padding: 16px;
+  border: 0.5px solid var(--color-border);
+  background-color: var(--color-bg);
 
-  &:hover,
-  &:focus-visible {
-    background-color: var(--color-surface);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    transform: translateY(100%);
+    transition: transform 300ms ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: translateY(0);
   }
 }
 
 .imageWrap {
   position: relative;
-  aspect-ratio: 3 / 4;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-md);
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
 .image {
   object-fit: contain;
-  padding: var(--space-4);
+  z-index: 2;
 }
 
 .info {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+  transition: color 200ms ease;
+}
+
+.card:hover .info,
+.card:focus-visible .info {
+  color: var(--color-bg);
 }
 
 .brand {
@@ -38,17 +59,27 @@
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  transition: color 200ms ease;
+}
+
+.nameRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
 .name {
   margin: 0;
   font-size: var(--font-size-md);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .price {
   margin: 0;
   font-size: var(--font-size-sm);
-  color: var(--color-fg);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }

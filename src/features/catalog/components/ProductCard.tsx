@@ -20,8 +20,10 @@ export const ProductCard = memo(function ProductCard({ product }: { product: Pro
       </div>
       <div className={styles.info}>
         <p className={styles.brand}>{product.brand}</p>
-        <p className={styles.name}>{product.name}</p>
-        <p className={styles.price}>{formatPrice(product.basePrice)}</p>
+        <div className={styles.nameRow}>
+          <p className={styles.name}>{product.name}</p>
+          <p className={styles.price}>{formatPrice(product.basePrice)}</p>
+        </div>
       </div>
     </Link>
   );
