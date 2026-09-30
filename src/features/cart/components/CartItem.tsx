@@ -21,22 +21,23 @@ export function CartItem({ item }: { item: CartItemType }) {
         />
       </div>
       <div className={styles.info}>
-        <p className={styles.brand}>{item.brand}</p>
-        <p className={styles.name}>{item.name}</p>
-        <p className={styles.specs}>
-          {item.color.name} · {item.storage.capacity}
-        </p>
+        <div className={styles.details}>
+          <p className={styles.name}>{item.name}</p>
+          <p className={styles.specs}>
+            {item.storage.capacity} | {item.color.name.toUpperCase()}
+          </p>
+          <p className={styles.price}>{formatPrice(item.unitPrice)}</p>
+        </div>
+        <button
+          type="button"
+          className={styles.remove}
+          onClick={() => removeItem(item.cartLineId)}
+          aria-label={COPY.cart.removeAria(item.brand, item.name)}
+          data-testid={TEST_IDS.REMOVE_ITEM}
+        >
+          {COPY.cart.REMOVE}
+        </button>
       </div>
-      <p className={styles.price}>{formatPrice(item.unitPrice)}</p>
-      <button
-        type="button"
-        className={styles.remove}
-        onClick={() => removeItem(item.cartLineId)}
-        aria-label={COPY.cart.removeAria(item.brand, item.name)}
-        data-testid={TEST_IDS.REMOVE_ITEM}
-      >
-        {COPY.cart.REMOVE}
-      </button>
     </li>
   );
 }

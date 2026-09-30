@@ -1,41 +1,82 @@
-.summary {
-  padding: var(--space-5);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  display: flex;
-  flex-direction: column;
+.footer {
+  display: grid;
   gap: var(--space-3);
-  background-color: var(--color-bg);
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-8);
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'label amount'
+    'continue pay';
   align-items: center;
-  font-size: var(--font-size-md);
-  font-variant-numeric: tabular-nums;
+
+  @media (min-width: 768px) {
+    grid-template-columns: auto 1fr auto auto auto;
+    grid-template-areas: 'continue . label amount pay';
+    gap: var(--space-6);
+  }
 }
 
-.total {
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
-  font-weight: 600;
-  font-size: var(--font-size-lg);
+.totalLabel {
+  grid-area: label;
+  justify-self: start;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  @media (min-width: 768px) {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.totalAmount {
+  grid-area: amount;
+  justify-self: end;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  @media (min-width: 768px) {
+    font-size: var(--font-size-sm);
+    justify-self: start;
+  }
 }
 
 .continue {
+  grid-area: continue;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-fg);
-  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
   color: var(--color-fg);
-  font-weight: 500;
-  text-align: center;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 
-  &:hover {
-    background-color: var(--color-fg);
-    color: var(--color-bg);
+  @media (min-width: 768px) {
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--font-size-sm);
+    justify-self: start;
+  }
+}
+
+.pay {
+  grid-area: pay;
+  padding: var(--space-3);
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  border: none;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+
+  @media (min-width: 768px) {
+    min-width: 220px;
+    padding: var(--space-3) var(--space-8);
+    font-size: var(--font-size-sm);
+    justify-self: end;
   }
 }

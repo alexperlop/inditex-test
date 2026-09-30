@@ -34,15 +34,13 @@ export function CartView() {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{COPY.cart.HEADING}</h1>
-      <div className={styles.grid}>
-        <ul className={styles.list}>
-          {items.map((item) => (
-            <CartItem key={item.cartLineId} item={item} />
-          ))}
-        </ul>
-        <CartSummary />
-      </div>
+      <h1 className={styles.title}>{COPY.cart.headingWithCount(items.length)}</h1>
+      <ul className={styles.list}>
+        {items.map((item) => (
+          <CartItem key={item.cartLineId} item={item} />
+        ))}
+      </ul>
+      <CartSummary />
     </div>
   );
 }

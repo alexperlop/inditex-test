@@ -170,6 +170,8 @@ export const COPY = {
     TOTAL_LABEL: 'Total',
     REMOVE: 'Eliminar',
     removeAria: (brand: string, name: string) => `Eliminar ${brand} ${name} del carrito`,
+    PAY: 'Pagar',
+    headingWithCount: (count: number) => `Carrito (${count})`,
   },
 } as const;
 
