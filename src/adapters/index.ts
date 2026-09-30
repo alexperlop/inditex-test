@@ -1,2 +1,2 @@
-export * from './product.adapter';
-export * from './product.schema';
+export * from './productAdapter';
+export * from './productSchema';

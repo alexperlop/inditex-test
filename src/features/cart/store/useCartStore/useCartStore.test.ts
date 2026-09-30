@@ -1,6 +1,6 @@
 import { beforeEach, describe, it, expect } from 'vitest';
 import { CART } from '@/constants';
-import { useCartStore } from './useCartStore';
+import { useCartStore } from '.';
 import type { ColorOption, ProductDetail, StorageOption } from '@/domain/product';
 
 const color: ColorOption = { name: 'Negro', hexCode: '#000', imageUrl: 'https://x/y.webp' };

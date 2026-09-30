@@ -1,4 +1,4 @@
-import { adaptProductDetail, adaptProductList } from '@/adapters/product.adapter';
+import { adaptProductDetail, adaptProductList } from '@/adapters/productAdapter';
 import { API } from '@/constants';
 import type { ProductDetail, ProductListItem } from '@/domain/product';
 import { getApiClient } from '@/services/http/axiosClient';

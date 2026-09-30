@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatPrice } from './format';
+import { formatPrice } from '.';
 
 describe('formatPrice', () => {
   it('formats integers as EUR without decimals', () => {

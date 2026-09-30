@@ -1,10 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { CONFIGURATOR_ACTION } from '@/constants';
-import {
-  configuratorReducer,
-  initialConfiguratorState,
-  type ConfiguratorState,
-} from './configuratorReducer';
+import { configuratorReducer, initialConfiguratorState, type ConfiguratorState } from '.';
 
 const color = { name: 'Negro', hexCode: '#000', imageUrl: 'https://x/y.webp' };
 const storage = { capacity: '256 GB', price: 999 };

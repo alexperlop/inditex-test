@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { adaptProductDetail, adaptProductList } from './product.adapter';
+import { adaptProductDetail, adaptProductList } from '.';
 
 describe('adaptProductList', () => {
   it('maps DTO items and normalizes http→https on imageUrl', () => {
