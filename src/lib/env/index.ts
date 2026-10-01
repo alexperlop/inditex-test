@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ENV } from '@/constants';
 
 const serverSchema = z.object({
-  PHONE_API_URL: z.string().url(),
+  PHONE_API_URL: z.url(),
   PHONE_API_KEY: z.string().min(1, ENV.ERROR_KEY_REQUIRED),
   NODE_ENV: z.enum(ENV.NODE_ENVS).default(ENV.DEFAULT_NODE_ENV),
 });
