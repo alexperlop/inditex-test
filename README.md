@@ -31,7 +31,7 @@ Este README documenta **qué** se ha construido, **cómo** está organizado y so
 | **TanStack Query v5**                  | 5.x     | Cacheo cliente + servidor con **hidratación**: RSC hace `prefetchQuery` → `dehydrate` → el cliente hidrata sin re-fetch. Evita el flash de "loading", reduce roundtrips y da revalidación en background gratis. Un `useEffect + fetch` sería inmediatamente inferior.                                            |
 | **Zustand 5**                          | 5.x     | Estado global del **carrito** con middleware `persist` a `localStorage` incluido de fábrica. No queríamos meter Context API + `useReducer` + serialización manual para un caso claramente global y persistente.                                                                                                  |
 | **Zod 4**                              | 4.x     | Validación en el **borde del sistema** (adapter). La API es externa y su contrato puede romperse; Zod convierte "unknown" en `ProductDetail` o falla con un mensaje claro. También deriva tipos DTO sin duplicación.                                                                                             |
-| **Axios**                              | 1.20    | Interceptores de error, timeouts y separación limpia entre cliente **servidor** (con API key) e **navegador** (sin credenciales). `fetch` nativo obligaría a repetir manualmente estas primitivas.                                                                                                               |
+| **Axios**                              | 1.20    | Interceptores de error, timeouts y separación limpia entre cliente **servidor** (con API key) y **navegador** (sin credenciales). `fetch` nativo obligaría a repetir manualmente estas primitivas.                                                                                                               |
 | **SASS + CSS Modules**                 | 1.105   | Aislamiento por componente sin runtime (a diferencia de styled-components/emotion). Los **tokens** (`--color-*`, `--space-*`) viven en `:root` y son consumidos tanto por CSS como por SCSS via `var(...)`. Coste cero en JS.                                                                                    |
 | **Vitest 3 + Testing Library**         | 3.2     | Vitest es más rápido que Jest sobre Vite/Turbopack y comparte configuración con el bundler. RTL fuerza a testear como el usuario, no la implementación.                                                                                                                                                          |
 | **Cypress 16**                         | 16.1    | E2E real contra el binario de producción. Comprueba el flujo completo (catálogo → configurar → carrito → persistencia) que ningún test unitario puede cubrir.                                                                                                                                                    |
@@ -282,10 +282,10 @@ Dentro de cada feature se sigue el mismo principio a menor escala: `components/`
 | Estructura                                                                        | Descripción                                      | Por qué **no** se eligió aquí                                                                                                            |
 | --------------------------------------------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Folder-by-type** (`components/`, `hooks/`, `stores/`)                           | Todo agrupado por tipo técnico                   | Añadir features requiere tocar N carpetas; entender un flujo obliga a saltar entre ellas. Escala mal.                                    |
-| **Atomic Design** (`atoms/`, `molecules/`, `organisms/`, `templates/`, `pages/`)  | Componentes clasificados por tamaño visual       | Las categorías son subjetivas y generan discusiones estériles ("¿esto es molécula u organismo?"). No aporta valor al dominio de negocio. |
-| **Domain-Driven Design completo** (bounded contexts, agregados, repos, use-cases) | Capas y patrones DDD estrictos                   | Sobre-ingeniería para una app de 3 features. Todo el aparato DDD sin el volumen de negocio que lo justifica se vuelve ceremonia.         |
+| **Atomic Design** (`atoms/`, `molecules/`, `organisms/`, `templates/`, `pages/`)  | Componentes clasificados por tamaño visual       | Las categorías son subjetivas y generan discusiones. No aporta valor al dominio de negocio. |
+| **Domain-Driven Design completo** (bounded contexts, agregados, repos, use-cases) | Capas y patrones DDD estrictos                   | Sobre-ingeniería para una app de 3 features.                                                                                                 |
 | **Flat structure** (`src/*.tsx`)                                                  | Todo en la raíz                                  | Solo válido para ~5 archivos. Se descarta desde el minuto uno.                                                                           |
-| **✅ Feature-first + hexagonal ligero** (elegido)                                 | Features verticales + separación de capas mínima | Suficiente estructura para crecer sin ceremonia. Cada capa justifica su existencia con un problema resuelto.                             |
+| **✅ Feature-first + hexagonal ligero** (elegido)                                 | Features verticales + separación de capas mínima | Suficiente estructura para crecer. Cada capa justifica su existencia con un problema resuelto.                             |
 
 ---
 
@@ -518,15 +518,6 @@ npm run test -- -t "normalizes http"   # solo tests cuyo nombre coincide con el 
 
 **Ubicación:** los tests viven **junto al código** (`*.test.ts` colocated), no en una carpeta `__tests__/` remota. Facilita encontrarlos y borrarlos con la unidad que prueban.
 
-**Cobertura relevante actualmente:**
-
-| Archivo                                                         | Qué verifica                                                                               |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `src/adapters/product.adapter.test.ts`                          | Mapping DTO → dominio, normalización `http→https`, errores de schema, `trim()` de strings. |
-| `src/lib/format.test.ts`                                        | `formatPrice` con distintos locales / edge cases.                                          |
-| `src/features/catalog/hooks/useDebouncedValue.test.ts`          | Debounce con timers falsos (`vi.useFakeTimers`).                                           |
-| `src/features/product-detail/state/configuratorReducer.test.ts` | Transiciones puras del reducer (SET_COLOR, SET_STORAGE, edge cases).                       |
-| `src/features/cart/store/useCartStore.test.ts`                  | `addItem` (nuevo/duplicado), `removeItem`, `clear`, generación de `cartLineId`.            |
 
 ---
 
@@ -540,14 +531,6 @@ Se ejecutan con el **mismo comando que los unit tests** (Vitest no distingue: la
 npm run test:run
 ```
 
-**Cobertura relevante:**
-
-- `src/features/product-detail/components/ProductConfigurator/ProductConfigurator.test.tsx`:
-  1. Se monta el `ProductConfigurator` completo (con todos los sub-componentes Compound + `ConfiguratorProvider`).
-  2. El usuario cambia color y almacenamiento con `userEvent`.
-  3. Se verifica que el CTA "Añadir" pasa de disabled a enabled.
-  4. Se verifica que el precio mostrado se actualiza al `storage.price` seleccionado.
-  5. Al hacer click en el CTA, `useCartStore.addItem` recibe la selección correcta.
 
 **Buenas prácticas seguidas:**
 
@@ -592,13 +575,6 @@ npm run build && \
   npx wait-on http://localhost:3010 && \
   CYPRESS_baseUrl=http://localhost:3010 npm run e2e
 ```
-
-**Specs incluidas** (`cypress/e2e/`):
-
-| Spec              | Qué cubre                                                                                                                                                                                                                             |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `catalog.cy.ts`   | Render del grid inicial (SSR + hidratación), filtrado con `SearchBar`, la URL como fuente de verdad del término de búsqueda (`?q=iphone`).                                                                                            |
-| `cart-flow.cy.ts` | Flujo end-to-end: catálogo → detalle → configurar color/almacenamiento → añadir al carrito → verificar total → eliminar. Además `cy.reload()` para verificar la **persistencia** en `localStorage` (middleware `persist` de Zustand). |
 
 **Fixtures y support:** `cypress/fixtures/` para datos estáticos, `cypress/support/e2e.ts` para comandos personalizados y hooks globales.
 
